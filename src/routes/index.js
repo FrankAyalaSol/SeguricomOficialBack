@@ -90,3 +90,9 @@ function verifyToken(req, res, next) {
     req.userId = payload._id;
     next();
 }
+
+router.post('/Solicitar_Cita', async(req,res)=> {
+    const { nombre, numero, email, tipo } = req.body;
+    const newCita = new Cita({nombre, numero, email, tipo});
+    await newCita.save();
+})
