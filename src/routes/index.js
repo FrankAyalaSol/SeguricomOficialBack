@@ -20,12 +20,13 @@ router.post('/crear-usuario', async (req, res) => {
 router.post('/iniciar-sesion', async (req, res) => {
     const {email, password} = req.body;
     const user = await User.findOne({email});
+    const rol = user.rol;
     
     if(!user) return res.status(401).send("The email doesn't exists");
     if(user.password !== password) return res.status(401).send("Wrong Password");
 
     const token = jwt.sign({_id: user._id}, 'secretkey');
-    return res.status(200).json({token});
+    return res.status(200).json({token,rol});
 });
 
 router.get('/tasks', (req, res) => {
