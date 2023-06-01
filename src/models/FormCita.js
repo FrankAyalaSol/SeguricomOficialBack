@@ -1,16 +1,16 @@
 const { Schema, model } = require('mongoose');
 
 const CitaSchema = new Schema({
-    pregunta1:String,
-    pregunta2:String,
-    pregunta3:String,
-    pregunta4:String,
-    pregunta5:String,
-    pregunta6:String,
-    pregunta7:String,
-    pregunta8:String,
-    pregunta9:String,
-    pregunta10:String,
+    respuesta1:String,
+    respuesta2:String,
+    respuesta3:String,
+    respuesta4:String,
+    respuesta5:String,
+    respuesta6:String,
+    respuesta7:String,
+    respuesta8:String,
+    respuesta9:String,
+    respuesta10:String,
 },{
     timestamps: true
 })
