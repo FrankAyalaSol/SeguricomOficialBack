@@ -44,8 +44,8 @@ const eliminarCliente = async (req, res) => {
 };
 
 const registrar = async (req, res) => {
-    const { email, nombre } = req.body;
-    const existeUsuario = await ClienteModel.findOne({ email });
+    const { correo_electronico } = req.body;
+    const existeUsuario = await ClienteModel.findOne({ correo_electronico });
 
     if (existeUsuario) {
         const error = new Error("El usuario ya existe");
