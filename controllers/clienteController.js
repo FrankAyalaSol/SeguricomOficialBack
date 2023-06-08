@@ -1,6 +1,7 @@
 // import Cliente from "../models/ClienteModel.js";
 import DetalleEstudio from "../models/DetalleEstudio.js";
-import Cliente from "../models/ClienteModel.js";
+import ClienteModel from "../models/ClienteModel.js";
+import generarJWT from "../helpers/GenerarJWT.js";
 
 const obtenerClientes = async (req, res) => {
     try {
@@ -42,30 +43,47 @@ const eliminarCliente = async (req, res) => {
     }
 };
 
-const RegistrarCliente = async (req, res) => {
-    try {
-        const {
-        firstname, 
-        lastname, 
-        email, 
-        phone, 
-        client_type, 
-        birth_date, 
-        password
-        } = req.body;
-        const newUser = new Cliente({
-            firstname,
-            lastname,
-            email,
-            phone,
-            client_type,
-            birth_date,
-            password,
-        });
+const registrar = async (req, res) => {
+    const { email, nombre } = req.body;
+    const existeUsuario = await ClienteModel.findOne({ email });
 
-        res.status(200).json({token});
+    if (existeUsuario) {
+        const error = new Error("El usuario ya existe");
+        return res.status(400).json({ msg: error.message });
+    }
+    try {
+        const cliente = new ClienteModel(req.body);
+        const clienteGuardado = await cliente.save();
+
+        res.status(200).json(clienteGuardado);
     } catch (error) {
-        res.status(500).json({ msg: error.message });
+        console.log(error);
+    }
+};
+
+const autenticar = async (req, res) => {
+    const { email, password } = req.body;
+    const cliente = await ClienteModel.findOne({ email });
+
+    // Verifica si el usuario existe en la BD
+    if (!cliente) {
+        const error = new Error("El usuario no existe");
+        return res.status(404).json({ msg: error.message });
+    }
+
+    // Verifica si el password es correcto
+    // "comrpobarPassword()" ESTA DEFINIDO EN EL MODELO
+    if (await cliente.comprobarPassword(password)) {
+        console.log(cliente);
+        res.json({
+            _id: cliente._id,
+            nombre: cliente.nombre,
+            email: cliente.email,
+            token: generarJWT(cliente.id),
+        });
+    } else {
+        const error = new Error("El password es incorrecto");
+        res.status(404).json({ msg: error.message });
     }
 };
 
@@ -108,7 +126,8 @@ const registrarDetalleEstudio = async (req, res) => {
 };
 
 export {
-    RegistrarCliente,
+    registrar,
+    autenticar,
     obtenerClientes,
     obtenerCliente,
     agregarCliente,

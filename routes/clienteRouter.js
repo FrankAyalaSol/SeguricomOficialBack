@@ -1,5 +1,7 @@
 import { Router } from "express";
 import {
+  registrar,
+  autenticar,
   obtenerClientes,
   obtenerCliente,
   agregarCliente,
@@ -16,6 +18,8 @@ router
   .get(obtenerCliente)
   .put(actualizarCliente)
   .delete(eliminarCliente);
+  router.post("/registrar",registrar)
+  router.post("/autenticar",autenticar)
   router.post("/clientes/:idCliente", registrarDetalleEstudio)
 
 export default router;
