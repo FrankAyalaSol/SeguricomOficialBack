@@ -20,6 +20,6 @@ router
   .delete(eliminarCliente);
   router.post("/registrar",registrar)
   router.post("/autenticar",autenticar)
-  router.post("/clientes/:idCliente", registrarDetalleEstudio)
+  router.post("/:idCliente", registrarDetalleEstudio)
 
 export default router;

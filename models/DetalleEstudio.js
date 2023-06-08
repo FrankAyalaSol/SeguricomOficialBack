@@ -1,6 +1,22 @@
 import mongoose from "mongoose";
 
 const detalleEstudioSchema = mongoose.Schema({
+    // nombre: {
+    //     type: String,
+    //     required: true,
+    // },
+    // apellido: {
+    //     type: String,
+    //     required: true,
+    // },
+    // celular: {
+    //     type: Number,
+    //     required: true,
+    // },
+    // direccion:{
+    //     type:String,
+    //     required:true
+    // },
     respuesta_1: {
         type: String,
     },
@@ -27,6 +43,10 @@ const detalleEstudioSchema = mongoose.Schema({
     },
     respuesta_9: {
         type: String,
+    },
+    cliente: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ClienteModel",
     },
 });
 

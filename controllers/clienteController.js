@@ -12,8 +12,15 @@ const obtenerClientes = async (req, res) => {
 };
 
 const obtenerCliente = async (req, res) => {
+    const {id} = req.params
     try {
-        res.status(200).json("obtenerCliente");
+        const cliente = await ClienteModel.findById(id);
+        res.status(200).json({
+            nombre: cliente.nombre,
+            apellido: cliente.apellido,
+            celular: cliente.celular,
+            direccion: cliente.direccion
+        });
     } catch (error) {
         res.status(500).json({ msg: error.message });
     }
@@ -91,7 +98,8 @@ const autenticar = async (req, res) => {
 // Funcion para guardar registro de detalle del estudio
 const registrarDetalleEstudio = async (req, res) => {
     const { idCliente } = req.params;
-    const cliente = await Cliente.findById(idCliente);
+    const cliente = await ClienteModel.findById(idCliente);
+    // const ordenVisita = await DetalleEstudio.findById(idOrdenVisita);
     try {
         const {
             respuesta_1,
@@ -105,6 +113,10 @@ const registrarDetalleEstudio = async (req, res) => {
             respuesta_9,
         } = req.body;
         const detalleEstudio = new DetalleEstudio({
+            // nombre: cliente.nombre,
+            // apellido: cliente.apellido,
+            // celular: cliente.celular,
+            // direccion: cliente.direccion,
             respuesta_1,
             respuesta_2,
             respuesta_3,
@@ -114,11 +126,24 @@ const registrarDetalleEstudio = async (req, res) => {
             respuesta_7,
             respuesta_8,
             respuesta_9,
+            cliente: cliente.id
         });
+        // const clienteDetalleEstudio = new DetalleEstudio({
+        //                    nombre: cliente.nombre,
+        //         apellido: cliente.apellido,
+        //         celular: cliente.celular,
+        //         direccion: cliente.direccion,
+        //     detalleEstudio
+        // })
         const detalleEstudioAlmacenado = await detalleEstudio.save();
 
         res.status(200).json({
-            cliente: cliente,
+            cliente: {
+                nombre: cliente.nombre,
+                apellido: cliente.apellido,
+                celular: cliente.celular,
+                direccion: cliente.direccion,
+            },
             detalleEstudio: detalleEstudioAlmacenado,
         });
     } catch (error) {
