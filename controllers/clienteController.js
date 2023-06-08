@@ -62,8 +62,8 @@ const registrar = async (req, res) => {
 };
 
 const autenticar = async (req, res) => {
-    const { email, password } = req.body;
-    const cliente = await ClienteModel.findOne({ email });
+    const { correo_electronico, password } = req.body;
+    const cliente = await ClienteModel.findOne({ correo_electronico });
 
     // Verifica si el usuario existe en la BD
     if (!cliente) {
@@ -78,7 +78,8 @@ const autenticar = async (req, res) => {
         res.json({
             _id: cliente._id,
             nombre: cliente.nombre,
-            email: cliente.email,
+            correo_electronico: cliente.correo_electronico,
+            rol: cliente.rol,
             token: generarJWT(cliente.id),
         });
     } else {

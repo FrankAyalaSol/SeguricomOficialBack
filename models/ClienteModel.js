@@ -36,10 +36,16 @@ const clienteSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    rol:{
+        type:Number,
+        required:true,
+        default:4
+    },
     especialista: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "EspecialistaModel",
-    },},
+    },
+    },
     {
         timestamp:true,
         versionKey:false,
