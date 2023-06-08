@@ -5,6 +5,7 @@ import {
   agregarCliente,
   actualizarCliente,
   eliminarCliente,
+  registrarDetalleEstudio
 } from "../controllers/clienteController.js";
 
 const router = Router();
@@ -15,5 +16,6 @@ router
   .get(obtenerCliente)
   .put(actualizarCliente)
   .delete(eliminarCliente);
+  router.post("/clientes/:idCliente", registrarDetalleEstudio)
 
 export default router;
