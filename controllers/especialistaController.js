@@ -1,4 +1,5 @@
 // import Especialista from "../models/EspecialistaModel.js";
+import Cliente from "../models/ClienteModel.js"
 
 const obtenerEspecialistas = async (req, res) => {
     try {
@@ -45,5 +46,5 @@ export {
     obtenerEspecialista,
     agregarEspecialista,
     actualizarEspecialista,
-    eliminarEspecialista,
+    eliminarEspecialista
 };

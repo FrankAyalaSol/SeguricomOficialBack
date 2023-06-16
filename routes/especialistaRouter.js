@@ -4,7 +4,7 @@ import {
   obtenerEspecialista,
   agregarEspecialista,
   actualizarEspecialista,
-  eliminarEspecialista,
+  eliminarEspecialista
 } from "../controllers/especialistaController.js";
 
 const router = Router();

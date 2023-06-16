@@ -2,6 +2,8 @@
 import DetalleEstudio from "../models/DetalleEstudio.js";
 import ClienteModel from "../models/ClienteModel.js";
 import generarJWT from "../helpers/GenerarJWT.js";
+import EspecialistaClienteModel from "../models/EspecialistaClienteModel.js";
+import DetalleVisitaModel from "../models/DetalleVisitaModel.js";
 
 const obtenerClientes = async (req, res) => {
     try {
@@ -151,6 +153,47 @@ const registrarDetalleEstudio = async (req, res) => {
     }
 };
 
+const registrarDetalleVisita = async (req, res) => {
+    const {idCliente, idEspecialistaCliente} = req.params;
+    const {detalle} = req.body;
+    try {
+        const cliente = await ClienteModel.findById(idCliente).select("-_id dni direccion")
+        const especialistaCliente = await EspecialistaClienteModel.findById(idEspecialistaCliente).select("-_id -__v -nombreEspecialista")
+        // res.status(200).json({
+        //     nombre: cliente.nombre,
+        //     dni: cliente.dni,
+        //     celular: cliente.celular,
+        //     tipo: cliente.tipo,
+        // })
+
+        // res.status(200).json({direccionCliente, especialistaCliente})
+        const direccionCliente = cliente.direccion;
+        const dniCliente = cliente.dni;
+        const nombreEspecialistaCliente = especialistaCliente.nombreCliente;
+        const fechaEspecialistaCliente = especialistaCliente.fecha;
+        const horaEspecialistaCliente = especialistaCliente.hora;
+
+        const detalleVisita = new DetalleVisitaModel({
+            dniCliente,
+            direccionCliente,
+            nombreEspecialistaCliente,
+            fechaEspecialistaCliente,
+            horaEspecialistaCliente,
+            // cliente.direccion,
+            // cliente.dni,
+            // especialistaCliente.nombreCliente,
+            // especialistaCliente.fecha,
+            // especialistaCliente.hora,
+            detalle
+        })
+        await detalleVisita.save()
+        
+        res.status(200).json(detalleVisita)
+    } catch (error) {
+        res.status(500).json({ msg: error.message})
+    }
+}
+
 export {
     registrar,
     autenticar,
@@ -159,5 +202,6 @@ export {
     agregarCliente,
     actualizarCliente,
     eliminarCliente,
-    registrarDetalleEstudio
+    registrarDetalleEstudio,
+    registrarDetalleVisita
 };

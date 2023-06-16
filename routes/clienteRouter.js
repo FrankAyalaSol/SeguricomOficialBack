@@ -7,7 +7,8 @@ import {
   agregarCliente,
   actualizarCliente,
   eliminarCliente,
-  registrarDetalleEstudio
+  registrarDetalleEstudio,
+  registrarDetalleVisita
 } from "../controllers/clienteController.js";
 
 const router = Router();
@@ -21,5 +22,6 @@ router
   router.post("/registrar",registrar)
   router.post("/autenticar",autenticar)
   router.post("/:idCliente", registrarDetalleEstudio)
+  router.post("/clientes/:idCliente/especialistasClientes/:idEspecialistaCliente", registrarDetalleVisita)
 
 export default router;
