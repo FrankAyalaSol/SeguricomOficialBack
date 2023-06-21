@@ -1,22 +1,6 @@
 import mongoose from "mongoose";
 
 const detalleEstudioSchema = mongoose.Schema({
-    // nombre: {
-    //     type: String,
-    //     required: true,
-    // },
-    // apellido: {
-    //     type: String,
-    //     required: true,
-    // },
-    // celular: {
-    //     type: Number,
-    //     required: true,
-    // },
-    // direccion:{
-    //     type:String,
-    //     required:true
-    // },
     respuesta_1: {
         type: String,
     },

@@ -26,11 +26,14 @@ const clienteSchema = mongoose.Schema({
     dni: {
         type: Number,
         required: true,
-        unique: true
+        unique: true,
+        default: "-"
     },
-    fecha_nacimiento:{
+    ruc:{
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        default: "-"
     },
     direccion:{
         type:String,
