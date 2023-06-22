@@ -9,12 +9,14 @@ const obtenerCliente = async (req, res) => {
     const {id} = req.params
     try {
         const cliente = await ClienteModel.findById(id);
-        res.status(200).json({
-            nombre: cliente.nombre,
-            apellido: cliente.apellido,
-            celular: cliente.celular,
-            direccion: cliente.direccion
-        });
+        // res.status(200).json({
+        //     _id:cliente.id,
+        //     nombre: cliente.nombre,
+        //     apellido: cliente.apellido,
+        //     celular: cliente.celular,
+        //     direccion: cliente.direccion
+        // });
+        res.status(200).json(cliente)
     } catch (error) {
         res.status(500).json({ msg: error.message });
     }
