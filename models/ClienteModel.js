@@ -24,7 +24,7 @@ const clienteSchema = mongoose.Schema({
         required: true,
     },
     dni: {
-        type: Number,
+        type: String,
         required: true,
         unique: true,
         default: "-"
