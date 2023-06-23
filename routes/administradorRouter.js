@@ -1,19 +1,17 @@
 import { Router } from "express";
 import {
-  obtenerAdministradores,
-  obtenerAdministrador,
-  agregarAdministrador,
-  actualizarAdministrador,
-  eliminarAdministrador,
+    actualizarCliente,
+    visualizarCliente,
+    filtrarCliente,
+    eliminarCliente,
 } from "../controllers/administradorController.js";
 
 const router = Router();
 
-router.route("/").get(obtenerAdministradores).post(agregarAdministrador);
-router
-  .route("/:id")
-  .get(obtenerAdministrador)
-  .put(actualizarAdministrador)
-  .delete(eliminarAdministrador);
+// router.route("/").get(obtenerAdministradores).post(agregarAdministrador);
+router.put("/:idCliente", actualizarCliente);
+router.get("/:idCliente", visualizarCliente);
+router.get("/", filtrarCliente);
+router.delete("/:idCliente", eliminarCliente);
 
 export default router;

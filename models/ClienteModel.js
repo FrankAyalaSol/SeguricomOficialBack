@@ -26,13 +26,13 @@ const clienteSchema = mongoose.Schema({
     dni: {
         type: String,
         required: true,
-        unique: true,
+        // unique: true,
         default: "-"
     },
     ruc:{
         type: String,
         required: true,
-        unique: true,
+        // unique: true,
         default: "-"
     },
     direccion:{
