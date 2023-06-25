@@ -59,7 +59,7 @@ const obtenerClientePendiente = async (req, res) => {
 
         res.status(200).json({
             nombre: cliente.nombre,
-            apellido: cliente.nombre,
+            apellido: cliente.apellido,
             dni: cliente.dni,
             ruc: cliente.ruc,
             celular: cliente.celular,
